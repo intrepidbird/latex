@@ -1,15 +1,10 @@
 $(document).ready(function() {
-    $('#latexGeneratorForm').submit(function(e) {
+    $('#latexForm').submit(function(e) {
         e.preventDefault();
-        let equation = $('#equation').val();
-        let latexOutput = generateLatex(equation);
-        $('#latexOutput').val(latexOutput);
+        let latexCode = $('#latexCode').val();
+        let imageUrl = 'https://latex.codecogs.com/svg.latex?' + encodeURIComponent(latexCode);
+        let imageHtml = '<img src="' + imageUrl + '" class="latex-image">';
+        $('#latexOutput').html(imageHtml);
     });
-
-    function generateLatex(equation) {
-        // Logic to generate Latex from equation
-        // Replace this with your own logic
-        let latex = "\\[ " + equation + " \\]";
-        return latex;
-    }
 });
+
