@@ -3,38 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IntrepidBird | LaTeX</title>
+    <title>LaTeX Rendering</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #000033;
+            color: #ffffff;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .latex-input {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 18px;
+            color: #000033;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .latex-output {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .latex-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header class="bg-dark text-white text-center p-4">
-        LaTeX Generator
+        <h1>LaTeX Rendering</h1>
     </header>
 
-    <!-- Latex Generator Form -->
-    <section id="latex-generator" class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h2>Generate LaTeX</h2>
-                <form id="latexGeneratorForm">
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form id="latexForm">
                     <div class="form-group">
-                        <label for="equation">Equation:</label>
-                        <input type="text" class="form-control" id="equation" placeholder="Enter equation" required>
+                        <label for="latexCode">Enter LaTeX Code:</label>
+                        <textarea class="form-control latex-input" id="latexCode" placeholder="Enter LaTeX code here, such as $e{i/pi}+1=0$" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="latexOutput">LaTeX Output:</label>
-                        <textarea class="form-control" id="latexOutput" rows="5" readonly></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Generate</button>
+                    <button type="submit" class="btn btn-primary w-100">Render</button>
                 </form>
+                <div id="latexOutput" class="latex-output"></div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4 mt-5">
+        &copy; 2023 IntrepidBird. All rights reserved.
+    </footer>
 
     <!-- Bootstrap & jQuery JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- MathJax JS -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function() {
+            $('#latexForm').submit(function(e) {
+                e.preventDefault();
+                let latexCode = $('#latexCode').val();
+                let imageUrl = 'https://latex.codecogs.com/svg.latex?' + encodeURIComponent(latexCode);
+                let imageHtml = '<img src="' + imageUrl + '" class="latex-image">';
+                $('#latexOutput').html(imageHtml);
+            });
+        });
+    </script>
 </body>
 </html>
