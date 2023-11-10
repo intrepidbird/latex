@@ -1,5 +1,5 @@
 # Math Equation LaTeX
 
-A website that translate a math equation to TeX (LaTeX)
+A website that translate a math equation to LaTeX
 
-Under Construction
+Nearly every serious student of math or science will use LaTeX frequently. (AoPS)
